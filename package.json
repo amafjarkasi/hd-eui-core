@@ -1,6 +1,6 @@
 {
   "name": "@amafjarkasi/hd-eui-core",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "💎 HD-EUI Core: An elite-tier, TypeScript-native React component library engineered for high-stakes enterprise environments. Built on the principles of Hyper-Density, Structured Boundaries, and Micro-Typography, it provides a data-rich experience inspired by the Zendesk Compact Utilitarian design system. Features 33+ production-ready components optimized for sidebars, dashboards, and complex B2B tools. Includes Layout (Card, Modal, Sidebar), Form (Button, Input, Select), Data Display (Table, Tree, Badge), and Navigation (Breadcrumb, Pagination, Stepper). Fully accessible, ultra-lightweight (~20KB), and Tailwind CSS native. Live Storybook: https://hd-eui-storybook.netlify.app",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
