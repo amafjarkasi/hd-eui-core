@@ -1,0 +1,48 @@
+{
+  "name": "@hd-eui/core",
+  "version": "1.0.0",
+  "description": "High-Density Enterprise UI components based on the Compact Utilitarian style guide",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "jest",
+    "lint": "eslint . --ext .ts,.tsx",
+    "storybook": "storybook dev -p 6006"
+  },
+  "peerDependencies": {
+    "react": ">=16.8",
+    "react-dom": ">=16.8"
+  },
+  "dependencies": {
+    "lucide-react": "^0.460.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "typescript": "^5.0.0",
+    "tailwindcss": "^3.0.0",
+    "postcss": "^8.4.0",
+    "autoprefixer": "^10.4.0",
+    "jest": "^29.0.0",
+    "eslint": "^8.0.0",
+    "eslint-plugin-react": "^7.0.0",
+    "clsx": "^2.0.0"
+  },
+  "keywords": [
+    "ui",
+    "react",
+    "tailwind",
+    "design-system",
+    "high-density",
+    "compact"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/amafjarkasi/hd-eui-core"
+  }
+}
