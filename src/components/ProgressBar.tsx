@@ -1,8 +1,12 @@
 import React from "react";
 
-interface ProgressBarProps {
+export type ProgressBarVariant = "primary" | "success" | "danger";
+
+export interface ProgressBarProps {
   value?: number;
   indeterminate?: boolean;
+  variant?: ProgressBarVariant;
+  showLabel?: boolean;
   className?: string;
 }
 

@@ -7,7 +7,7 @@ interface TabItem {
   content: React.ReactNode;
 }
 
-interface TabsProps {
+export interface TabsProps {
   tabs: TabItem[];
   defaultActive?: number;
   onChange?: (index: number) => void;
@@ -21,6 +21,8 @@ export const Tabs: React.FC<TabsProps> = ({
   defaultActive = 0,
   onChange,
   className,
+  tabClassName,
+  contentClassName,
 }) => {
   const [active, setActive] = useState(defaultActive);
 

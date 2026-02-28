@@ -1,10 +1,11 @@
-import type { Preview } from '@storybook/react';
-import React from 'react';
-import '../src/index';
+import type { Preview } from "@storybook/react";
+import React from "react";
+import "../src/index";
+import "../src/index.css";
 
 const preview: Preview = {
   parameters: {
-    actions: { argTypesRegex: '^on[A-Z].*' },
+    actions: { argTypesRegex: "^on[A-Z].*" },
     controls: {
       matchers: {
         color: /(background|color)$/i,
@@ -14,10 +15,17 @@ const preview: Preview = {
     docs: {
       toc: true,
     },
-    layout: 'padded',
+    layout: "padded",
     options: {
       storySort: {
-        order: ['Components', 'Layout', 'Form', 'Feedback', 'Data Display', 'Navigation'],
+        order: [
+          "Components",
+          "Layout",
+          "Form",
+          "Feedback",
+          "Data Display",
+          "Navigation",
+        ],
       },
     },
   },
@@ -28,7 +36,7 @@ const preview: Preview = {
       </div>
     ),
   ],
-  tags: ['autodocs'],
+  tags: ["autodocs"],
 };
 
 export default preview;
