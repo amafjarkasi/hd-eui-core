@@ -1,4 +1,4 @@
-# 💎 HD-EUI Core: High-Density Enterprise UI Framework
+# 💎 HD-EUI Core: The High-Density Enterprise UI Framework
 
 [![NPM Version](https://img.shields.io/npm/v/@amafjarkasi/hd-eui-core?style=for-the-badge&color=2f3941&logo=npm)](https://www.npmjs.com/package/@amafjarkasi/hd-eui-core)
 [![License](https://img.shields.io/npm/l/@amafjarkasi/hd-eui-core?style=for-the-badge&color=87929d)](LICENSE)
