@@ -19,7 +19,6 @@ With 33+ components, HD-EUI Core provides a complete toolkit for building profes
 - **Customization**: Extendable theme tokens for colors, spacing, typography, and borders via Tailwind config.
 - **Performance**: Lightweight, tree-shakable, with smooth animations (pulse, shimmer, transitions) for loading and interactions.
 - **Developer Tools**: Storybook integration for interactive docs, Jest tests, ESLint configs, and GitHub workflows for CI/CD, linting, testing, building, and NPM publishing.
-- **Framework-Agnostic Design**: Core tokens can be adapted to Vue, Angular, or plain CSS.
 - **Enterprise-Ready**: Supports hierarchical data (Tree, Accordion), multi-step processes (Stepper), forms with validation, and dense tables with sorting/pagination.
 
 ## Installation

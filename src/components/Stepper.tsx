@@ -1,11 +1,3 @@
-<file_path>
-my-hd-eui-library\src\components\Stepper.tsx
-</file_path>
-
-<edit_description>
-Clean Stepper.tsx
-</edit_description>
-
 import React, { useState } from "react";
 import clsx from "clsx";
 
@@ -53,8 +45,8 @@ export const Stepper: React.FC<StepperProps> = ({
       completed
         ? "bg-hd-primary text-white"
         : isActive
-        ? "bg-hd-focus text-white"
-        : "bg-hd-bg-light text-hd-muted",
+          ? "bg-hd-focus text-white"
+          : "bg-hd-bg-light text-hd-muted",
     );
 
   const labelClasses = (isActive: boolean) =>
@@ -69,20 +61,24 @@ export const Stepper: React.FC<StepperProps> = ({
     <div className={containerClasses}>
       {steps.map((step, index) => (
         <React.Fragment key={index}>
-          <div className={stepItemClasses} onClick={() => handleStepClick(index)}>
-            <div className={circleClasses(active === index, step.completed || index < active)}>
+          <div
+            className={stepItemClasses}
+            onClick={() => handleStepClick(index)}
+          >
+            <div
+              className={circleClasses(
+                active === index,
+                step.completed || index < active,
+              )}
+            >
               {step.completed || index < active ? "✓" : index + 1}
             </div>
             {!vertical && (
-              <div className={labelClasses(active === index)}>
-                {step.label}
-              </div>
+              <div className={labelClasses(active === index)}>{step.label}</div>
             )}
           </div>
           {vertical && (
-            <div className={labelClasses(active === index)}>
-              {step.label}
-            </div>
+            <div className={labelClasses(active === index)}>{step.label}</div>
           )}
           {!vertical && index < steps.length - 1 && (
             <div className={lineClasses} />
