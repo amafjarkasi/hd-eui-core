@@ -1,7 +1,7 @@
 {
   "name": "@amafjarkasi/hd-eui-core",
   "version": "1.0.0",
-  "description": "HD-EUI Core: A production-ready React UI library for hyper-dense enterprise applications. Built with TypeScript and Tailwind CSS, inspired by Zendesk's Compact Utilitarian design system. Features 33+ components with ultra-tight spacing (2-4px), micro-typography (8-11px), and a strict monochrome palette. Perfect for data-heavy dashboards, admin panels, and B2B tools where information density is critical. Includes Layout (Card, CardGrid, Modal, Sidebar), Form (Button, Input, Select, Checkbox, Radio, Slider), Feedback (Alert, Toast, Spinner, ProgressBar, Skeleton), Data Display (Table, Badge, Avatar, Tree, Accordion), and Navigation (Breadcrumb, Pagination, Stepper, Tabs, Dropdown) components. All components support TypeScript, theme customization, and accessibility out of the box. Live Storybook: https://hd-eui-storybook.netlify.app",
+  "description": "💎 HD-EUI Core: An elite-tier, TypeScript-native React component library engineered for high-stakes enterprise environments. Built on the principles of Hyper-Density, Structured Boundaries, and Micro-Typography, it provides a data-rich experience inspired by the Zendesk Compact Utilitarian design system. Features 33+ production-ready components optimized for sidebars, dashboards, and complex B2B tools. Includes Layout (Card, Modal, Sidebar), Form (Button, Input, Select), Data Display (Table, Tree, Badge), and Navigation (Breadcrumb, Pagination, Stepper). Fully accessible, ultra-lightweight (~20KB), and Tailwind CSS native. Live Storybook: https://hd-eui-storybook.netlify.app",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
