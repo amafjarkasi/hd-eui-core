@@ -17,7 +17,6 @@
 In complex B2B applications, admin panels, and real-time monitoring systems, "white space" is often wasted space. HD-EUI Core optimizes every pixel to maximize information throughput without compromising cognitive clarity.
 
 ### The Three Pillars:
-
 1.  **Hyper-Density**: Standardized micro-spacing (`2px` - `4px` gaps) and tight padding (`p-1`) to maximize screen real estate.
 2.  **Structured Boundaries**: Hard `1px` borders (`#d8dcde`) replace soft shadows, providing immediate visual sectioning for complex data sets.
 3.  **Micro-Typography**: A precision-tuned typographic scale (`8px` to `11px`) designed for readability at small sizes.
@@ -217,4 +216,3 @@ Distributed under the MIT License. See `LICENSE` for more information.
 *   **Security**: See [SECURITY.md](SECURITY.md) for reporting vulnerabilities.
 
 Built with ❤️ by [amafjarkasi](https://github.com/amafjarkasi). If you find this library useful, please give it a ⭐ on GitHub!
-```markdown
