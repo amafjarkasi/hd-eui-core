@@ -1,34 +1,35 @@
-# HD-EUI Core: Hyper-Dense Enterprise UI Library
+# 💎 HD-EUI Core: High-Density Enterprise UI
 
-![NPM Version](https://img.shields.io/npm/v/@amafjarkasi/hd-eui-core?style=flat-square)
-![License](https://img.shields.io/npm/l/@amafjarkasi/hd-eui-core?style=flat-square)
-![Build Status](https://img.shields.io/github/actions/workflow/status/amafjarkasi/hd-eui-core/ci.yml?style=flat-square)
-![Storybook](https://img.shields.io/badge/-Storybook-FF4785?style=flat-square&logo=storybook&logoColor=white)
+[![NPM Version](https://img.shields.io/npm/v/@amafjarkasi/hd-eui-core?style=for-the-badge&color=2f3941&logo=npm)](https://www.npmjs.com/package/@amafjarkasi/hd-eui-core)
+[![License](https://img.shields.io/npm/l/@amafjarkasi/hd-eui-core?style=for-the-badge&color=87929d)](LICENSE)
+[![Bundle Size](https://img.shields.io/bundlephobia/minzip/@amafjarkasi/hd-eui-core?style=for-the-badge&color=1f73b7)](https://bundlephobia.com/package/@amafjarkasi/hd-eui-core)
+[![Storybook](https://img.shields.io/badge/-Storybook-FF4785?style=for-the-badge&logo=storybook&logoColor=white)](https://hd-eui-storybook.netlify.app)
 
-**HD-EUI Core** is a high-performance, TypeScript-first React component library engineered specifically for data-dense enterprise applications. Inspired by the **Zendesk Compact Utilitarian** design system, it prioritizes information density, professional aesthetics, and extreme efficiency in constrained layouts.
+**HD-EUI Core** is a world-class, TypeScript-first React component library engineered for high-stakes enterprise environments. Inspired by the **Zendesk Compact Utilitarian** design system, it is purpose-built for data-dense interfaces where every pixel counts.
 
-[View Live Storybook Documentation](https://hd-eui-storybook.netlify.app)
+[**Explore the Docs (Storybook) →**](https://hd-eui-storybook.netlify.app)
 
 ---
 
-## 📐 Design Philosophy
+## 📐 The Philosophy of Hyper-Density
 
-In enterprise B2B environments, information density is a feature, not a bug. HD-EUI Core is built on three pillars:
+In complex B2B applications, admin panels, and real-time dashboards, "white space" is often wasted space. HD-EUI Core flips the script on modern "airy" design by prioritizing **Information Density** without sacrificing **Cognitive Clarity**.
 
-1.  **Hyper-Density**: Minimal whitespace, tight gaps (`2px` - `4px`), and micro-padding to maximize screen real estate.
-2.  **Structured Layouts**: Heavy reliance on hard `1px` borders (`#d8dcde`) for sectioning instead of shadows or large margins.
-3.  **Micro-Typography**: Optimized for readability at small scales (`8px` - `11px`) using a strict monochrome-first color palette.
+*   **Micro-Spacing**: Standardized `2px` (tight) and `4px` (ultra) gaps.
+*   **Precision Typography**: Optimized readability for `8px` to `11px` font scales.
+*   **Hard Boundaries**: 1px structured borders (`#d8dcde`) replace soft shadows for immediate sectioning.
+*   **Contextual Sizing**: Built for constrained layouts like 300px sidebars and multi-pane dashboards.
 
 ---
 
 ## ✨ Key Features
 
-- 🚀 **33+ Production-Ready Components**: From basic buttons to complex hierarchical trees and validated forms.
-- 🎨 **Tailwind CSS Powered**: Fully customizable through Tailwind tokens and standard utility classes.
-- 🛡️ **TypeScript Native**: Robust type definitions for every prop, ensuring a seamless developer experience.
-- ♿ **Accessibility**: Built-in ARIA support, keyboard navigation, and high-contrast focus states.
-- 📦 **Ultra-Lightweight**: ~20KB gzipped bundle size with full tree-shaking support.
-- 🧩 **Contextual Sizing**: Specifically designed for sidebars (300px-380px) and complex multi-panel dashboards.
+*   🚀 **33+ Production-Ready Components**: A comprehensive suite covering Layout, Forms, Data Display, and Navigation.
+*   🎨 **Tailwind CSS Native**: Fully integrated with Tailwind's utility-first engine for zero-overhead styling.
+*   🛡️ **TypeScript Excellence**: 100% type-safe with exported interfaces for every component and prop.
+*   ♿ **Enterprise Accessibility**: Built-in ARIA support, keyboard navigation, and high-contrast focus states.
+*   📦 **Tree-Shakable & Lightweight**: Only ~20KB gzipped, ensuring your enterprise app stays fast.
+*   🌓 **Strict Monochrome Palette**: Professional slate-and-azure palette designed for long-duration focus.
 
 ---
 
@@ -48,7 +49,7 @@ npm install react react-dom tailwindcss lucide-react clsx
 
 ## 🛠️ Configuration
 
-To apply the HD-EUI theme, update your `tailwind.config.js`:
+To unlock the full power of the HD-EUI design system, update your `tailwind.config.js`:
 
 ```javascript
 /** @type {import('tailwindcss').Config} */
@@ -61,10 +62,10 @@ module.exports = {
     extend: {
       colors: {
         hd: {
-          primary: "#2f3941", // Slate
+          primary: "#2f3941",       // Slate
           "primary-hover": "#1f252a",
-          border: "#d8dcde", // Gainsboro
-          focus: "#1f73b7", // Azure
+          border: "#d8dcde",        // Gainsboro
+          focus: "#1f73b7",         // Azure
           muted: "#87929d",
           "bg-light": "#ffffff",
           "bg-dark": "#f8f9fa",
@@ -92,78 +93,89 @@ module.exports = {
 
 ## 🚀 Quick Start
 
+### Basic Usage
 ```tsx
-import React from 'react';
-import { Button, Card, Table, Badge } from '@amafjarkasi/hd-eui-core';
+import { Button, Card, Badge } from '@amafjarkasi/hd-eui-core';
 
-const Dashboard = () => {
-  const columns = [
-    { key: 'id', header: 'ID', width: '50px' },
-    { key: 'status', header: 'Status', render: (val) => <Badge variant="primary">{val}</Badge> },
-    { key: 'desc', header: 'Description' }
-  ];
+const App = () => (
+  <Card title="System Status" footer="v1.0.4">
+    <div className="flex items-center gap-ultra">
+      <Badge variant="success">Online</Badge>
+      <span className="text-body text-hd-primary">Core Engine Active</span>
+    </div>
+    <Button variant="primary" size="sm" className="mt-2">Reboot</Button>
+  </Card>
+);
+```
 
-  const data = [
-    { id: '001', status: 'Active', desc: 'System core initialized' },
-    { id: '002', status: 'Pending', desc: 'Awaiting user input' }
-  ];
+### Data-Dense Table
+```tsx
+import { Table } from '@amafjarkasi/hd-eui-core';
 
-  return (
-    <Card title="System Overview" footer="Last sync: 1m ago">
-      <Table data={data} columns={columns} striped />
-      <div className="flex gap-1 mt-2">
-        <Button variant="primary" size="sm">Refresh</Button>
-        <Button variant="outline" size="sm">Export CSV</Button>
-      </div>
-    </Card>
-  );
-};
+const columns = [
+  { key: 'id', header: 'ID', width: '60px' },
+  { key: 'user', header: 'User', sortable: true },
+  { key: 'role', header: 'Role', render: (val) => <Badge>{val}</Badge> }
+];
+
+const data = [
+  { id: '001', user: 'Amaf J.', role: 'Admin' },
+  { id: '002', user: 'John D.', role: 'Editor' }
+];
+
+<Table data={data} columns={columns} striped onSort={(key, dir) => handleSort(key, dir)} />
 ```
 
 ---
 
 ## 📚 Component Catalog
 
-### Layout & Containers
-*   **Card**: Structured containers with header/footer support.
-*   **CardGrid**: Responsive grid system with `auto-fit` capabilities.
-*   **Modal**: Lightweight overlays with backdrop blur.
-*   **Sidebar**: Collapsible navigation optimized for 300px constraints.
-*   **Accordion**: Space-saving collapsible content sections.
-
-### Form Elements
-*   **Button**: 4 variants, 3 sizes, loading states, and icon integration.
-*   **Input**: High-density text fields with micro-labels.
-*   **Form**: Validation-ready wrapper using React Context.
-*   **Select/Dropdown**: Compact selection menus with keyboard navigation.
-*   **Checkbox/Radio/Slider**: Minimalist inputs for dense data entry.
-
-### Data Display
-*   **Table**: Sortable, striped, and paginated data grids.
-*   **Tree**: Hierarchical data navigation with collapsible nodes.
-*   **Badge**: Status indicators with 3 density variants.
-*   **Avatar**: Initials-based or image-based user identifiers.
-*   **List**: Divided or dense list views.
-
-### Feedback & Navigation
-*   **Alert/AlertDialog**: Contextual feedback and confirmation dialogs.
-*   **ProgressBar/Spinner**: Smooth, non-intrusive loading indicators.
-*   **Skeleton**: Shimmering placeholders for async data.
-*   **Breadcrumb/Pagination/Stepper**: Compact navigation trails and multi-step flows.
-*   **Tooltip/Popover**: Non-blocking contextual information.
+| Category | Components |
+| :--- | :--- |
+| **Layout** | `Card`, `CardGrid`, `Modal`, `Sidebar`, `Accordion`, `Tabs` |
+| **Form** | `Button`, `Input`, `Form`, `Select`, `Checkbox`, `Radio`, `Slider`, `Dropdown` |
+| **Data Display** | `Table`, `Tree`, `Badge`, `Avatar`, `List`, `CodeEditor`, `Calendar` |
+| **Feedback** | `Alert`, `AlertDialog`, `Toast`, `Notification`, `Spinner`, `ProgressBar`, `Skeleton`, `Tooltip`, `Popover` |
+| **Navigation** | `Breadcrumb`, `Pagination`, `Stepper`, `Navbar` |
 
 ---
 
-## 🧪 Development & Testing
+## 🎨 Theming & Customization
+
+HD-EUI Core is built on design tokens. You can import these tokens directly into your own custom components to maintain visual consistency:
+
+```tsx
+import { colors, spacing, fontSize } from '@amafjarkasi/hd-eui-core';
+
+const CustomPanel = () => (
+  <div style={{ 
+    backgroundColor: colors["bg-dark"], 
+    padding: spacing.tight,
+    border: `1px solid ${colors.border}`
+  }}>
+    <h1 style={{ fontSize: fontSize.header }}>Custom Header</h1>
+  </div>
+);
+```
+
+---
+
+## 🧪 Development
 
 ```bash
-# Run Storybook for component development
+# Clone the repo
+git clone https://github.com/amafjarkasi/hd-eui-core.git
+
+# Install dependencies
+npm install
+
+# Start Storybook for interactive development
 npm run storybook
 
-# Build the library for production
+# Build for production
 npm run build
 
-# Run unit tests
+# Run tests
 npm test
 ```
 
@@ -171,12 +183,26 @@ npm test
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see our [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
+We are building the future of high-density UI. If you want to contribute:
+1. Fork the repository.
+2. Create a feature branch (`git checkout -b feature/amazing-component`).
+3. Commit your changes (`git commit -m 'Add some amazing component'`).
+4. Push to the branch (`git push origin feature/amazing-component`).
+5. Open a Pull Request.
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Please see [CONTRIBUTING.md](CONTRIBUTING.md) for more details.
 
 ---
 
-Built with ❤️ by [amafjarkasi](https://github.com/amafjarkasi).
+## 📄 License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+---
+
+## 📧 Support
+
+*   **Issues**: [GitHub Issue Tracker](https://github.com/amafjarkasi/hd-eui-core/issues)
+*   **Discussions**: [GitHub Discussions](https://github.com/amafjarkasi/hd-eui-core/discussions)
+
+Built with ❤️ by [amafjarkasi](https://github.com/amafjarkasi). If you find this library useful, please give it a ⭐ on GitHub!
