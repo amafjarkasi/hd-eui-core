@@ -1,24 +1,25 @@
-# 💎 HD-EUI Core: High-Density Enterprise UI
+# 💎 HD-EUI Core: High-Density Enterprise UI Framework
 
 [![NPM Version](https://img.shields.io/npm/v/@amafjarkasi/hd-eui-core?style=for-the-badge&color=2f3941&logo=npm)](https://www.npmjs.com/package/@amafjarkasi/hd-eui-core)
 [![License](https://img.shields.io/npm/l/@amafjarkasi/hd-eui-core?style=for-the-badge&color=87929d)](LICENSE)
 [![Bundle Size](https://img.shields.io/bundlephobia/minzip/@amafjarkasi/hd-eui-core?style=for-the-badge&color=1f73b7)](https://bundlephobia.com/package/@amafjarkasi/hd-eui-core)
 [![Storybook](https://img.shields.io/badge/-Storybook-FF4785?style=for-the-badge&logo=storybook&logoColor=white)](https://hd-eui-storybook.netlify.app)
+[![TypeScript](https://img.shields.io/badge/-TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 
-**HD-EUI Core** is a world-class, TypeScript-first React component library engineered for high-stakes enterprise environments. Inspired by the **Zendesk Compact Utilitarian** design system, it is purpose-built for data-dense interfaces where every pixel counts.
+**HD-EUI Core** is an elite-tier, TypeScript-native React component library engineered for high-stakes enterprise environments. While modern design trends favor excessive whitespace, HD-EUI Core is built for the **Power User**—providing a hyper-dense, data-rich experience inspired by the **Zendesk Compact Utilitarian** design system.
 
-[**Explore the Docs (Storybook) →**](https://hd-eui-storybook.netlify.app)
+[**Explore the Interactive Documentation (Storybook) →**](https://hd-eui-storybook.netlify.app)
 
 ---
 
 ## 📐 The Philosophy of Hyper-Density
 
-In complex B2B applications, admin panels, and real-time dashboards, "white space" is often wasted space. HD-EUI Core flips the script on modern "airy" design by prioritizing **Information Density** without sacrificing **Cognitive Clarity**.
+In complex B2B applications, admin panels, and real-time monitoring systems, "white space" is often wasted space. HD-EUI Core optimizes every pixel to maximize information throughput without compromising cognitive clarity.
 
-*   **Micro-Spacing**: Standardized `2px` (tight) and `4px` (ultra) gaps.
-*   **Precision Typography**: Optimized readability for `8px` to `11px` font scales.
-*   **Hard Boundaries**: 1px structured borders (`#d8dcde`) replace soft shadows for immediate sectioning.
-*   **Contextual Sizing**: Built for constrained layouts like 300px sidebars and multi-pane dashboards.
+### The Three Pillars:
+1.  **Hyper-Density**: Standardized micro-spacing (`2px` - `4px` gaps) and tight padding (`p-1`) to maximize screen real estate.
+2.  **Structured Boundaries**: Hard `1px` borders (`#d8dcde`) replace soft shadows, providing immediate visual sectioning for complex data sets.
+3.  **Micro-Typography**: A precision-tuned typographic scale (`8px` to `11px`) designed for readability at small sizes.
 
 ---
 
@@ -26,10 +27,10 @@ In complex B2B applications, admin panels, and real-time dashboards, "white spac
 
 *   🚀 **33+ Production-Ready Components**: A comprehensive suite covering Layout, Forms, Data Display, and Navigation.
 *   🎨 **Tailwind CSS Native**: Fully integrated with Tailwind's utility-first engine for zero-overhead styling.
-*   🛡️ **TypeScript Excellence**: 100% type-safe with exported interfaces for every component and prop.
+*   🛡️ **Strict TypeScript Excellence**: 100% type-safe with exported interfaces for every component, prop, and event handler.
 *   ♿ **Enterprise Accessibility**: Built-in ARIA support, keyboard navigation, and high-contrast focus states.
-*   📦 **Tree-Shakable & Lightweight**: Only ~20KB gzipped, ensuring your enterprise app stays fast.
-*   🌓 **Strict Monochrome Palette**: Professional slate-and-azure palette designed for long-duration focus.
+*   📦 **Ultra-Lightweight**: ~20KB gzipped bundle size with full tree-shaking support.
+*   🌓 **Professional Monochrome Palette**: A sophisticated slate-and-azure palette designed for long-duration focus.
 
 ---
 
@@ -93,7 +94,7 @@ module.exports = {
 
 ## 🚀 Quick Start
 
-### Basic Usage
+### 1. Basic Component Usage
 ```tsx
 import { Button, Card, Badge } from '@amafjarkasi/hd-eui-core';
 
@@ -108,9 +109,9 @@ const App = () => (
 );
 ```
 
-### Data-Dense Table
+### 2. Data-Dense Table with Sorting
 ```tsx
-import { Table } from '@amafjarkasi/hd-eui-core';
+import { Table, Badge } from '@amafjarkasi/hd-eui-core';
 
 const columns = [
   { key: 'id', header: 'ID', width: '60px' },
@@ -123,7 +124,12 @@ const data = [
   { id: '002', user: 'John D.', role: 'Editor' }
 ];
 
-<Table data={data} columns={columns} striped onSort={(key, dir) => handleSort(key, dir)} />
+<Table 
+  data={data} 
+  columns={columns} 
+  striped 
+  onSort={(key, dir) => console.log(`Sorting ${key} by ${dir}`)} 
+/>
 ```
 
 ---
@@ -142,7 +148,7 @@ const data = [
 
 ## 🎨 Theming & Customization
 
-HD-EUI Core is built on design tokens. You can import these tokens directly into your own custom components to maintain visual consistency:
+HD-EUI Core is built on design tokens. You can import these tokens directly into your own custom components to maintain visual consistency across your entire application:
 
 ```tsx
 import { colors, spacing, fontSize } from '@amafjarkasi/hd-eui-core';
@@ -154,16 +160,19 @@ const CustomPanel = () => (
     border: `1px solid ${colors.border}`
   }}>
     <h1 style={{ fontSize: fontSize.header }}>Custom Header</h1>
+    <p style={{ fontSize: fontSize.body }}>Integrated with HD-EUI tokens.</p>
   </div>
 );
 ```
 
 ---
 
-## 🧪 Development
+## 🧪 Development Workflow
+
+If you wish to contribute or modify the library:
 
 ```bash
-# Clone the repo
+# Clone the repository
 git clone https://github.com/amafjarkasi/hd-eui-core.git
 
 # Install dependencies
@@ -172,10 +181,10 @@ npm install
 # Start Storybook for interactive development
 npm run storybook
 
-# Build for production
+# Build the library for production
 npm run build
 
-# Run tests
+# Run unit tests with Jest
 npm test
 ```
 
@@ -183,7 +192,7 @@ npm test
 
 ## 🤝 Contributing
 
-We are building the future of high-density UI. If you want to contribute:
+We are building the future of high-density UI. We welcome all contributions!
 1. Fork the repository.
 2. Create a feature branch (`git checkout -b feature/amazing-component`).
 3. Commit your changes (`git commit -m 'Add some amazing component'`).
@@ -200,9 +209,10 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ---
 
-## 📧 Support
+## 📧 Support & Community
 
 *   **Issues**: [GitHub Issue Tracker](https://github.com/amafjarkasi/hd-eui-core/issues)
 *   **Discussions**: [GitHub Discussions](https://github.com/amafjarkasi/hd-eui-core/discussions)
+*   **Security**: See [SECURITY.md](SECURITY.md) for reporting vulnerabilities.
 
 Built with ❤️ by [amafjarkasi](https://github.com/amafjarkasi). If you find this library useful, please give it a ⭐ on GitHub!
