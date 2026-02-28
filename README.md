@@ -1,4 +1,4 @@
-# 💎 HD-EUI Core: The High-Density Enterprise UI Framework
+# 💎 HD-EUI Core: High-Density Enterprise UI Framework
 
 [![NPM Version](https://img.shields.io/npm/v/@amafjarkasi/hd-eui-core?style=for-the-badge&color=2f3941&logo=npm)](https://www.npmjs.com/package/@amafjarkasi/hd-eui-core)
 [![License](https://img.shields.io/npm/l/@amafjarkasi/hd-eui-core?style=for-the-badge&color=87929d)](LICENSE)
@@ -17,6 +17,7 @@
 In complex B2B applications, admin panels, and real-time monitoring systems, "white space" is often wasted space. HD-EUI Core optimizes every pixel to maximize information throughput without compromising cognitive clarity.
 
 ### The Three Pillars:
+
 1.  **Hyper-Density**: Standardized micro-spacing (`2px` - `4px` gaps) and tight padding (`p-1`) to maximize screen real estate.
 2.  **Structured Boundaries**: Hard `1px` borders (`#d8dcde`) replace soft shadows, providing immediate visual sectioning for complex data sets.
 3.  **Micro-Typography**: A precision-tuned typographic scale (`8px` to `11px`) designed for readability at small sizes.
@@ -136,13 +137,13 @@ const data = [
 
 ## 📚 Component Catalog
 
-| Category | Components |
-| :--- | :--- |
-| **Layout** | `Card`, `CardGrid`, `Modal`, `Sidebar`, `Accordion`, `Tabs` |
-| **Form** | `Button`, `Input`, `Form`, `Select`, `Checkbox`, `Radio`, `Slider`, `Dropdown` |
-| **Data Display** | `Table`, `Tree`, `Badge`, `Avatar`, `List`, `CodeEditor`, `Calendar` |
-| **Feedback** | `Alert`, `AlertDialog`, `Toast`, `Notification`, `Spinner`, `ProgressBar`, `Skeleton`, `Tooltip`, `Popover` |
-| **Navigation** | `Breadcrumb`, `Pagination`, `Stepper`, `Navbar` |
+| Category | Components | Description |
+| :--- | :--- | :--- |
+| **Layout** | `Card`, `CardGrid`, `Modal`, `Sidebar`, `Accordion`, `Tabs` | Structural components for organizing complex views. |
+| **Form** | `Button`, `Input`, `Form`, `Select`, `Checkbox`, `Radio`, `Slider`, `Dropdown` | High-density input controls with validation support. |
+| **Data Display** | `Table`, `Tree`, `Badge`, `Avatar`, `List`, `CodeEditor`, `Calendar` | Optimized for high-throughput information visualization. |
+| **Feedback** | `Alert`, `AlertDialog`, `Toast`, `Notification`, `Spinner`, `ProgressBar`, `Skeleton`, `Tooltip`, `Popover` | Contextual messaging and loading states. |
+| **Navigation** | `Breadcrumb`, `Pagination`, `Stepper`, `Navbar` | Compact wayfinding for deep application hierarchies. |
 
 ---
 
@@ -216,3 +217,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 *   **Security**: See [SECURITY.md](SECURITY.md) for reporting vulnerabilities.
 
 Built with ❤️ by [amafjarkasi](https://github.com/amafjarkasi). If you find this library useful, please give it a ⭐ on GitHub!
+```markdown
