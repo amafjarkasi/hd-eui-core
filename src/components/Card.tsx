@@ -1,38 +1,80 @@
 import React from "react";
 import clsx from "clsx";
-import { colors } from "../theme";
 
-interface CardProps {
-  title?: string;
+export interface CardProps {
+  /** Card header title */
+  title?: React.ReactNode;
+  /** Optional content to display in the top right of the header */
+  headerAction?: React.ReactNode;
+  /** Card footer content */
   footer?: React.ReactNode;
+  /** Main card content */
   children?: React.ReactNode;
+  /** Additional CSS classes */
   className?: string;
+  /** If true, removes padding from the body section */
+  noPadding?: boolean;
+  /** Visual density variant */
+  variant?: "default" | "bordered" | "flat";
 }
 
+/**
+ * 💎 Card: A structured container for grouping related information.
+ * Optimized for high-density enterprise layouts with hard borders and micro-padding.
+ */
 export const Card: React.FC<CardProps> = ({
   title,
+  headerAction,
   footer,
   children,
   className,
+  noPadding = false,
+  variant = "default",
 }) => {
   const baseClasses = clsx(
-    "bg-hd-bg-light border border-hd-border rounded-md overflow-hidden shadow-sm min-h-16",
+    "flex flex-col rounded-md overflow-hidden transition-all duration-200 animate-fade-in",
+    "bg-hd-bg-light dark:bg-hd-dark-bg",
+    {
+      "border border-hd-border dark:border-hd-dark-border shadow-hd-sm":
+        variant === "default",
+      "border border-hd-border dark:border-hd-dark-border":
+        variant === "bordered",
+      "bg-hd-bg-dark dark:bg-hd-dark-bg-alt": variant === "flat",
+    },
     className,
+  );
+
+  const headerClasses = clsx(
+    "flex items-center justify-between px-2 py-1 border-b border-hd-border dark:border-hd-dark-border bg-hd-bg-dark dark:bg-hd-dark-bg-alt",
+  );
+
+  const bodyClasses = clsx("flex-1 min-w-0", {
+    "p-2": !noPadding,
+    "p-0": noPadding,
+  });
+
+  const footerClasses = clsx(
+    "px-2 py-1 border-t border-hd-border dark:border-hd-dark-border bg-hd-bg-light dark:bg-hd-dark-bg text-muted-sm",
   );
 
   return (
     <div className={baseClasses}>
       {title && (
-        <div className="px-1 py-0.5 border-b border-hd-border bg-hd-bg-dark">
-          <h3 className="text-[11px] font-bold text-hd-primary">{title}</h3>
+        <div className={headerClasses}>
+          <h3 className="text-header text-hd-primary dark:text-hd-dark-text truncate">
+            {title}
+          </h3>
+          {headerAction && (
+            <div className="flex items-center ml-2">{headerAction}</div>
+          )}
         </div>
       )}
-      <div className="p-1">{children}</div>
-      {footer && (
-        <div className="px-1 py-0.5 border-t border-hd-border bg-hd-bg-light">
-          <div className="text-[9px] text-hd-muted">{footer}</div>
-        </div>
-      )}
+
+      <div className={bodyClasses}>{children}</div>
+
+      {footer && <div className={footerClasses}>{footer}</div>}
     </div>
   );
 };
+
+export default Card;

@@ -53,7 +53,7 @@ export const Tree: React.FC<TreeProps> = ({
       <div key={node.id} className="tree-node">
         <div
           className={clsx(
-            "flex items-center px-1 py-0.5 text-[9px] text-hd-primary cursor-pointer hover:bg-hd-bg-dark transition-colors",
+            "flex items-center px-1 py-0.5 text-[9px] text-hd-primary dark:text-slate-300 cursor-pointer hover:bg-hd-bg-dark dark:hover:bg-slate-800 transition-colors",
             "focus:outline-none focus:ring-1 focus:ring-hd-focus",
             node.disabled && "opacity-50 cursor-not-allowed",
           )}
@@ -96,7 +96,7 @@ export const Tree: React.FC<TreeProps> = ({
   return (
     <div
       className={clsx(
-        "tree border border-hd-border rounded-md overflow-hidden bg-hd-bg-light",
+        "tree border border-hd-border dark:border-slate-700 rounded-md overflow-hidden bg-hd-bg-light dark:bg-slate-900",
         className,
       )}
     >

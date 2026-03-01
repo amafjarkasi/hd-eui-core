@@ -25,7 +25,7 @@ export const Avatar: React.FC<AvatarProps> = ({
   };
 
   const baseClasses = clsx(
-    "rounded-full border border-hd-border bg-hd-bg-light text-hd-primary flex items-center justify-center overflow-hidden",
+    "rounded-full border border-hd-border dark:border-hd-dark-border bg-hd-bg-light dark:bg-hd-dark-bg text-hd-primary dark:text-hd-dark-text flex items-center justify-center overflow-hidden transition-colors",
     sizeClasses[size],
     className,
   );

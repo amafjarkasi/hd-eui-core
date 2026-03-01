@@ -27,7 +27,8 @@ export const Skeleton: React.FC<SkeletonProps> = ({
   height,
   lines = 3,
 }) => {
-  const baseClasses = "bg-hd-bg-dark border border-hd-border";
+  const baseClasses =
+    "bg-hd-bg-dark dark:bg-slate-800 border border-hd-border dark:border-slate-700";
   const animationClasses: Record<SkeletonAnimation, string> = {
     pulse: "animate-pulse",
     wave: "relative overflow-hidden",

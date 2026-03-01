@@ -35,12 +35,12 @@ export const Spinner: React.FC<SpinnerProps> = ({
     lg: "h-4 w-4 border-2",
   };
   const colorClasses: Record<SpinnerColor, string> = {
-    primary: "border-hd-primary bg-transparent",
-    focus: "border-hd-focus bg-transparent",
-    muted: "border-hd-muted bg-transparent",
-    success: "border-green-500 bg-transparent",
-    warning: "border-yellow-500 bg-transparent",
-    error: "border-red-500 bg-transparent",
+    primary: "border-hd-primary bg-transparent dark:border-hd-primary",
+    focus: "border-hd-focus bg-transparent dark:border-hd-focus",
+    muted: "border-hd-muted bg-transparent dark:border-hd-muted",
+    success: "border-green-500 bg-transparent dark:border-green-400",
+    warning: "border-yellow-500 bg-transparent dark:border-yellow-400",
+    error: "border-red-500 bg-transparent dark:border-red-400",
   };
 
   const classes = clsx(

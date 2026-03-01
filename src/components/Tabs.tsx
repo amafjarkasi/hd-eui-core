@@ -33,11 +33,12 @@ export const Tabs: React.FC<TabsProps> = ({
 
   const baseTabClasses =
     "px-1.5 py-1 text-[9px] font-medium cursor-pointer transition-all duration-200 focus:outline-none focus:ring-1 focus:ring-hd-focus";
-  const activeTabClasses = "text-hd-primary border-b-2 border-hd-focus";
+  const activeTabClasses =
+    "text-hd-primary dark:text-hd-dark-text border-b-2 border-hd-focus";
   const inactiveTabClasses =
-    "text-hd-muted hover:text-hd-primary border-b-2 border-transparent";
+    "text-hd-muted hover:text-hd-primary dark:hover:text-hd-dark-text border-b-2 border-transparent";
   const contentClasses = clsx(
-    "mt-1 p-1 bg-hd-bg-light border border-hd-border rounded-md",
+    "mt-1 p-1 bg-hd-bg-light dark:bg-hd-dark-bg border border-hd-border dark:border-hd-dark-border rounded-md",
     contentClassName,
   );
 
@@ -45,7 +46,7 @@ export const Tabs: React.FC<TabsProps> = ({
     <div className={clsx("w-full", className)}>
       <div
         className={clsx(
-          "flex gap-0 border-b border-hd-border bg-hd-bg-light",
+          "flex gap-0 border-b border-hd-border dark:border-hd-dark-border bg-hd-bg-light dark:bg-hd-dark-bg-alt",
           tabClassName,
         )}
       >

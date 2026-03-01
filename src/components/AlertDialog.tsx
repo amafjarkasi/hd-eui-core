@@ -31,9 +31,13 @@ export const AlertDialog: React.FC<AlertDialogProps> = ({
 
   return (
     <Modal open={open} onClose={handleClose} size="sm" className={className}>
-      <div className="px-2 py-1">
-        <h3 className="text-[11px] font-bold text-hd-primary mb-1">{title}</h3>
-        <p className="text-[10px] text-hd-muted mb-2">{message}</p>
+      <div className="px-2 py-1 dark:bg-hd-dark-bg">
+        <h3 className="text-[11px] font-bold text-hd-primary dark:text-hd-dark-text mb-1">
+          {title}
+        </h3>
+        <p className="text-[10px] text-hd-muted dark:text-hd-dark-text-muted mb-2">
+          {message}
+        </p>
         <div className="flex gap-1 justify-end">
           {actions.length > 0 ? (
             actions.map((action, index) => (
@@ -49,7 +53,12 @@ export const AlertDialog: React.FC<AlertDialogProps> = ({
               </Button>
             ))
           ) : (
-            <Button variant="primary" size="sm" onClick={handleClose} className="px-2 py-1 text-[9px]">
+            <Button
+              variant="primary"
+              size="sm"
+              onClick={handleClose}
+              className="px-2 py-1 text-[9px]"
+            >
               OK
             </Button>
           )}

@@ -39,7 +39,7 @@ export const Accordion: React.FC<AccordionProps> = ({
   return (
     <div
       className={clsx(
-        "border border-hd-border rounded-md overflow-hidden",
+        "border border-hd-border dark:border-slate-700 rounded-md overflow-hidden",
         className,
       )}
     >
@@ -48,11 +48,13 @@ export const Accordion: React.FC<AccordionProps> = ({
         return (
           <div
             key={item.id}
-            className={clsx(index > 0 && "border-t border-hd-border")}
+            className={clsx(
+              index > 0 && "border-t border-hd-border dark:border-slate-700",
+            )}
           >
             <button
               className={clsx(
-                "w-full text-left px-1 py-0.5 text-[11px] font-bold text-hd-primary hover:bg-hd-bg-light flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-hd-focus",
+                "w-full text-left px-1 py-0.5 text-[11px] font-bold text-hd-primary dark:text-slate-200 hover:bg-hd-bg-light dark:hover:bg-slate-800 flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-hd-focus",
                 className,
               )}
               onClick={() => toggleItem(item.id)}
@@ -69,7 +71,7 @@ export const Accordion: React.FC<AccordionProps> = ({
             <div
               id={`${item.id}-content`}
               className={clsx(
-                "px-1 py-0.5 text-[10px] text-hd-primary bg-hd-bg-light border-t border-hd-border transition-all duration-200",
+                "px-1 py-0.5 text-[10px] text-hd-primary dark:text-slate-300 bg-hd-bg-light dark:bg-slate-900 border-t border-hd-border dark:border-slate-700 transition-all duration-200",
                 isOpen ? "block" : "hidden",
               )}
             >

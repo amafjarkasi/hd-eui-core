@@ -47,9 +47,9 @@ export const Pagination: React.FC<PaginationProps> = ({
   const visiblePages = getVisiblePages();
 
   const baseClass =
-    "inline-flex items-center gap-0.5 p-0.5 bg-hd-bg-light border border-hd-border rounded-md text-[8px]";
+    "inline-flex items-center gap-0.5 p-0.5 bg-hd-bg-light dark:bg-slate-900 border border-hd-border dark:border-slate-700 rounded-md text-[8px]";
   const buttonClass =
-    "px-0.5 py-0.5 border border-transparent hover:bg-hd-bg-dark hover:text-hd-primary transition-colors cursor-pointer";
+    "px-0.5 py-0.5 border border-transparent hover:bg-hd-bg-dark dark:hover:bg-slate-800 hover:text-hd-primary dark:text-slate-300 transition-colors cursor-pointer";
   const ellipsisClass = "px-1 py-0.5 text-hd-muted";
   const activeClass = "bg-hd-primary text-white font-bold";
   const disabledClass = "opacity-50 cursor-not-allowed";

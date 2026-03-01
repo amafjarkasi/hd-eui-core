@@ -122,8 +122,8 @@ export const Form: React.FC<FormProps> = ({
       <form onSubmit={handleSubmit} className={clsx("space-y-1", className)}>
         {children}
         {Object.keys(errors).length > 0 && (
-          <div className="mt-2 p-1 bg-red-50 border border-red-200 rounded-md">
-            <ul className="text-[8px] text-red-600 list-disc pl-4">
+          <div className="mt-2 p-1 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md">
+            <ul className="text-[8px] text-red-600 dark:text-red-400 list-disc pl-4">
               {Object.entries(errors).map(([field, message]) => (
                 <li key={field}>{message}</li>
               ))}

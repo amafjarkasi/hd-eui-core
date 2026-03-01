@@ -7,12 +7,19 @@ export const colors = {
   muted: "#87929d",
   "bg-light": "#ffffff",
   "bg-dark": "#f8f9fa",
+  // Dark Mode Tokens
+  "dark-bg": "#1f252a",
+  "dark-bg-alt": "#2f3941",
+  "dark-border": "#3e4b55",
+  "dark-text": "#d1d5db",
+  "dark-text-muted": "#9ca3af",
 };
 
 export const fontSize = {
   header: "11px",
   body: "10px",
   muted: "9px",
+  micro: "8px",
   mono: "10px",
 };
 

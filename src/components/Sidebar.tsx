@@ -30,7 +30,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   className,
 }) => {
   const baseClasses =
-    "flex flex-col h-full bg-hd-bg-light border-hd-border text-hd-primary text-[10px] transition-all duration-300 ease-in-out";
+    "flex flex-col h-full bg-hd-bg-light dark:bg-hd-dark-bg border-hd-border dark:border-hd-dark-border text-hd-primary dark:text-hd-dark-text text-[10px] transition-all duration-300 ease-in-out";
   const positionClasses = position === "left" ? "border-r" : "border-l";
   const widthClasses = collapsed ? "w-10" : "w-72"; // Denser: reduced from w-12 to w-10, w-80 to w-72
 
@@ -42,7 +42,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
     const isActive = activeItem === item.id;
     const hasChildren = item.children && item.children.length > 0;
     const itemClasses = clsx(
-      "flex items-center gap-0.5 px-1.5 py-1 cursor-pointer hover:bg-hd-bg-dark border-b border-hd-border transition-colors duration-200", // Denser: px-2 to px-1.5, py-1.5 to py-1, gap-1 to gap-0.5
+      "flex items-center gap-0.5 px-1.5 py-1 cursor-pointer hover:bg-hd-bg-dark dark:hover:bg-hd-dark-bg-alt border-b border-hd-border dark:border-hd-dark-border transition-colors duration-200", // Denser: px-2 to px-1.5, py-1.5 to py-1, gap-1 to gap-0.5
       isActive && "bg-hd-focus text-white",
       depth > 0 && "pl-3", // Denser: pl-4 to pl-3
     );

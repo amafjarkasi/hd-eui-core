@@ -25,8 +25,11 @@ export const List: React.FC<ListProps> = ({
   variant = "normal",
   className,
 }) => {
-  const baseClasses = "list-none space-y-1 text-hd-primary";
-  const dividedClasses = divided ? "divide-y divide-hd-border" : "";
+  const baseClasses =
+    "list-none space-y-1 text-hd-primary dark:text-hd-dark-text";
+  const dividedClasses = divided
+    ? "divide-y divide-hd-border dark:divide-hd-dark-border"
+    : "";
   const variantClasses: Record<ListVariant, string> = {
     dense: "px-1 py-0.5 text-[9px] space-y-0.5",
     normal: "px-2 py-1 text-[10px] space-y-1",

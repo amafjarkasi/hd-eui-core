@@ -102,7 +102,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
   };
 
   const menuClasses = clsx(
-    "absolute z-50 bg-hd-bg-light border border-hd-border rounded-md shadow-sm max-h-48 overflow-auto py-0.5",
+    "absolute z-50 bg-hd-bg-light dark:bg-slate-900 border border-hd-border dark:border-slate-700 rounded-md shadow-sm max-h-48 overflow-auto py-0.5",
     {
       "top-full left-0": placement === "bottom-left",
       "top-full right-0": placement === "bottom-right",
@@ -113,11 +113,12 @@ export const Dropdown: React.FC<DropdownProps> = ({
   );
 
   const itemClasses = clsx(
-    "px-2 py-1 text-[10px] text-hd-primary hover:bg-hd-bg-dark cursor-pointer",
+    "px-2 py-1 text-[10px] text-hd-primary dark:text-slate-200 hover:bg-hd-bg-dark dark:hover:bg-slate-800 cursor-pointer",
     "focus:outline-none focus:ring-2 focus:ring-hd-focus",
   );
 
-  const disabledItemClasses = "text-hd-muted cursor-not-allowed";
+  const disabledItemClasses =
+    "text-hd-muted dark:text-slate-500 cursor-not-allowed";
 
   return (
     <div ref={dropdownRef} className={clsx("relative inline-block", className)}>

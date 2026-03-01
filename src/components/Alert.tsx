@@ -36,10 +36,13 @@ export const Alert: React.FC<AlertProps> = ({
     md: "text-[9px]",
   };
   const variantClasses: Record<AlertVariant, string> = {
-    info: "border-l-4 border-hd-focus bg-hd-bg-light",
-    success: "border-l-4 border-green-500 text-green-800 bg-green-50",
-    warning: "border-l-4 border-yellow-500 text-yellow-800 bg-yellow-50",
-    error: "border-l-4 border-red-500 text-red-800 bg-red-50",
+    info: "border-l-4 border-hd-focus bg-hd-bg-light dark:bg-slate-900 dark:text-slate-200",
+    success:
+      "border-l-4 border-green-500 text-green-800 bg-green-50 dark:bg-green-900/20 dark:text-green-200",
+    warning:
+      "border-l-4 border-yellow-500 text-yellow-800 bg-yellow-50 dark:bg-yellow-900/20 dark:text-yellow-200",
+    error:
+      "border-l-4 border-red-500 text-red-800 bg-red-50 dark:bg-red-900/20 dark:text-red-200",
   };
 
   const iconClasses = "flex-shrink-0 w-3 h-3 mt-0.5";

@@ -25,7 +25,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
 
   return (
     <div
-      className={`w-full h-2 bg-hd-bg-dark rounded-md overflow-hidden ${className}`}
+      className={`w-full h-2 bg-hd-bg-dark dark:bg-slate-800 rounded-md overflow-hidden ${className}`}
     >
       <div
         className={`h-full transition-all duration-300 ease-in-out ${variantClasses[variant]} ${indeterminate ? "animate-pulse" : ""}`}

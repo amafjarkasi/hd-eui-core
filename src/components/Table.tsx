@@ -1,102 +1,115 @@
 import React from "react";
 import clsx from "clsx";
+import { ArrowUpDown, ChevronUp, ChevronDown } from "lucide-react";
 
-interface Column<T = any> {
+/**
+ * Column definition for the Data Table.
+ */
+export interface Column<T = any> {
+  /** Unique key for the column, matching a key in the data object */
   key: string;
+  /** Header label to display */
   header: string;
+  /** Optional fixed width (e.g., '100px', '10%') */
   width?: string;
+  /** Text alignment */
   align?: "left" | "center" | "right";
+  /** Custom renderer function for the cell content */
   render?: (value: any, row: T, index: number) => React.ReactNode;
+  /** Whether the column is sortable */
   sortable?: boolean;
-}
-
-interface TableProps<T = any> {
-  data: T[];
-  columns: Column<T>[];
+  /** Optional class name for the column cells */
   className?: string;
-  loading?: boolean;
-  emptyMessage?: string;
-  striped?: boolean;
-  onSort?: (key: string, direction: "asc" | "desc") => void;
-  sortKey?: string;
-  sortDirection?: "asc" | "desc";
 }
 
-export const Table = <T,>({
+/**
+ * Props for the Table component.
+ */
+export interface TableProps<T = any> {
+  /** Array of data objects to display */
+  data: T[];
+  /** Array of column definitions */
+  columns: Column<T>[];
+  /** Whether the table is in a loading state */
+  loading?: boolean;
+  /** Message to display when no data is available */
+  emptyMessage?: string;
+  /** Whether to show alternating row colors */
+  striped?: boolean;
+  /** Callback triggered when a sortable header is clicked */
+  onSort?: (key: string, direction: "asc" | "desc") => void;
+  /** The current key being sorted */
+  sortKey?: string;
+  /** The current sort direction */
+  sortDirection?: "asc" | "desc";
+  /** Optional class name for the table container */
+  className?: string;
+}
+
+/**
+ * A high-density, enterprise-grade data table optimized for high-throughput information display.
+ * Features include sorting, striped rows, loading skeletons, and full dark mode support.
+ */
+export const Table = <T extends Record<string, any>>({
   data = [],
   columns,
-  className,
   loading = false,
-  emptyMessage = "No data available",
-  striped = false,
+  emptyMessage = "No records found",
+  striped = true,
   onSort,
   sortKey,
   sortDirection,
+  className,
 }: TableProps<T>) => {
-  const baseTableClasses =
-    "w-full border-collapse border border-hd-border bg-hd-bg-light text-hd-primary";
-  const tableClasses = clsx(baseTableClasses, className);
-
-  const headerClasses =
-    "px-0.5 py-0.5 text-[11px] font-bold border border-hd-border bg-hd-bg-dark text-hd-primary uppercase tracking-wider";
-  const cellClasses =
-    "px-1 py-1 text-[10px] border border-hd-border align-top whitespace-nowrap";
-  const stripedRowClass = "bg-hd-bg-light";
-  const evenRowClass = striped ? "bg-hd-bg-light opacity-95" : "";
-
-  if (loading) {
-    return (
-      <div className="w-full border border-hd-border rounded-md p-1">
-        {Array(5)
-          .fill(0)
-          .map((_, i) => (
-            <div
-              key={i}
-              className="animate-pulse bg-hd-bg-dark h-4 w-full mb-1 rounded"
-            ></div>
-          ))}
-      </div>
-    );
-  }
-
-  if (data.length === 0) {
-    return (
-      <div className="w-full border border-hd-border rounded-md p-1">
-        <p className="text-[10px] text-hd-muted text-center">{emptyMessage}</p>
-      </div>
-    );
-  }
+  const handleSort = (column: Column<T>) => {
+    if (!column.sortable || !onSort) return;
+    const isCurrent = sortKey === column.key;
+    const direction = isCurrent && sortDirection === "asc" ? "desc" : "asc";
+    onSort(column.key, direction);
+  };
 
   return (
-    <div className="overflow-x-auto">
-      <table className={tableClasses}>
+    <div
+      className={clsx(
+        "w-full overflow-x-auto border border-hd-border dark:border-hd-dark-border rounded-md bg-hd-bg-light dark:bg-hd-dark-bg transition-colors",
+        className,
+      )}
+    >
+      <table className="w-full border-collapse table-fixed text-left">
         <thead>
-          <tr>
-            {columns.map((column, index) => (
+          <tr className="bg-hd-bg-dark dark:bg-hd-dark-bg-alt border-b border-hd-border dark:border-hd-dark-border">
+            {columns.map((col) => (
               <th
-                key={column.key}
+                key={col.key}
+                onClick={() => handleSort(col)}
+                style={{ width: col.width }}
                 className={clsx(
-                  headerClasses,
-                  column.align && `text-${column.align}`,
-                  column.width && `w-[${column.width}]`,
-                  column.sortable && "hover:text-hd-focus",
+                  "px-2 py-1 text-[11px] font-bold text-hd-primary dark:text-hd-dark-text uppercase tracking-wider select-none transition-colors",
+                  col.sortable &&
+                    "cursor-pointer hover:bg-hd-border/50 dark:hover:bg-hd-dark-border/50",
+                  col.align === "center" && "text-center",
+                  col.align === "right" && "text-right",
                 )}
-                style={column.width ? { width: column.width } : {}}
-                onClick={
-                  column.sortable
-                    ? () =>
-                        onSort?.(
-                          column.key,
-                          sortDirection === "asc" ? "desc" : "asc",
-                        )
-                    : undefined
-                }
               >
-                <div className="flex items-center justify-between">
-                  <span>{column.header}</span>
-                  {column.sortable && sortKey === column.key && (
-                    <span className="text-[8px]">
-                      {sortDirection === "asc" ? "↑" : "↓"}
+                <div
+                  className={clsx(
+                    "flex items-center gap-1",
+                    col.align === "center" && "justify-center",
+                    col.align === "right" && "justify-end",
+                  )}
+                >
+                  <span className="truncate">{col.header}</span>
+                  {col.sortable && (
+                    <span className="text-hd-muted dark:text-hd-dark-text-muted flex-shrink-0">
+                      {sortKey === col.key ? (
+                        sortDirection === "asc" ? (
+                          <ChevronUp size={10} strokeWidth={3} />
+                        ) : (
+                          <ChevronDown size={10} strokeWidth={3} />
+                        )
+                      ) : (
+                        <ArrowUpDown size={8} className="opacity-30" />
+                      )}
                     </span>
                   )}
                 </div>
@@ -104,34 +117,61 @@ export const Table = <T,>({
             ))}
           </tr>
         </thead>
-        <tbody>
-          {data.map((row, rowIndex) => (
-            <tr
-              key={rowIndex}
-              className={clsx(
-                cellClasses,
-                rowIndex % 2 === 0 ? evenRowClass : "",
-              )}
-            >
-              {columns.map((column, colIndex) => {
-                const value = (row as any)[column.key];
-                const renderedValue = column.render
-                  ? column.render(value, row, rowIndex)
-                  : value;
-                return (
-                  <td
-                    key={colIndex}
-                    className={clsx(
-                      cellClasses,
-                      column.align && `text-${column.align}`,
-                    )}
-                  >
-                    {renderedValue}
+        <tbody className="divide-y divide-hd-border dark:divide-hd-dark-border">
+          {loading ? (
+            // Skeleton Loading State
+            Array.from({ length: 5 }).map((_, i) => (
+              <tr key={`skeleton-${i}`} className="animate-pulse">
+                {columns.map((col) => (
+                  <td key={`skeleton-td-${col.key}`} className="px-2 py-1.5">
+                    <div className="h-2 bg-hd-bg-dark dark:bg-hd-dark-bg-alt rounded w-3/4" />
                   </td>
-                );
-              })}
+                ))}
+              </tr>
+            ))
+          ) : data.length === 0 ? (
+            // Empty State
+            <tr>
+              <td
+                colSpan={columns.length}
+                className="px-4 py-8 text-center text-[10px] text-hd-muted dark:text-hd-dark-text-muted italic"
+              >
+                {emptyMessage}
+              </td>
             </tr>
-          ))}
+          ) : (
+            // Data Rows
+            data.map((row, rowIndex) => (
+              <tr
+                key={row.id || row.key || rowIndex}
+                className={clsx(
+                  "group transition-colors hover:bg-hd-bg-dark dark:hover:bg-hd-dark-bg-alt",
+                  striped &&
+                    rowIndex % 2 !== 0 &&
+                    "bg-hd-bg-dark/30 dark:bg-hd-dark-bg-alt/20",
+                )}
+              >
+                {columns.map((col) => {
+                  const value = row[col.key];
+                  return (
+                    <td
+                      key={col.key}
+                      className={clsx(
+                        "px-2 py-1 text-[10px] text-hd-primary dark:text-hd-dark-text truncate align-middle border-r border-hd-border/30 dark:border-hd-dark-border/20 last:border-r-0",
+                        col.align === "center" && "text-center",
+                        col.align === "right" && "text-right",
+                        col.className,
+                      )}
+                    >
+                      {col.render
+                        ? col.render(value, row, rowIndex)
+                        : String(value ?? "")}
+                    </td>
+                  );
+                })}
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
     </div>

@@ -43,19 +43,21 @@ export const Stepper: React.FC<StepperProps> = ({
     clsx(
       "w-2 h-2 rounded-full border border-hd-border flex items-center justify-center text-[7px] font-bold transition-colors",
       completed
-        ? "bg-hd-primary text-white"
+        ? "bg-hd-primary text-white border-hd-primary"
         : isActive
-          ? "bg-hd-focus text-white"
-          : "bg-hd-bg-light text-hd-muted",
+          ? "bg-hd-focus text-white border-hd-focus"
+          : "bg-hd-bg-light dark:bg-hd-dark-bg text-hd-muted dark:text-hd-dark-text-muted border-hd-border dark:border-hd-dark-border",
     );
 
   const labelClasses = (isActive: boolean) =>
     clsx(
       "text-[8px] leading-none",
-      isActive ? "font-bold text-hd-primary" : "text-hd-muted",
+      isActive
+        ? "font-bold text-hd-primary dark:text-hd-dark-text"
+        : "text-hd-muted dark:text-hd-dark-text-muted",
     );
 
-  const lineClasses = "flex-1 h-0.5 bg-hd-border";
+  const lineClasses = "flex-1 h-0.5 bg-hd-border dark:bg-hd-dark-border";
 
   return (
     <div className={containerClasses}>

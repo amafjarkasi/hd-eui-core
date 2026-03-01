@@ -31,6 +31,7 @@ In complex B2B applications, admin panels, and real-time monitoring systems, "wh
 *   ♿ **Enterprise Accessibility**: Built-in ARIA support, keyboard navigation, and high-contrast focus states.
 *   📦 **Ultra-Lightweight**: ~20KB gzipped bundle size with full tree-shaking support.
 *   🌓 **Professional Monochrome Palette**: A sophisticated slate-and-azure palette designed for long-duration focus.
+*   🌑 **Native Dark Mode**: Full support for dark themes with a specialized "Deep Slate" palette.
 
 ---
 
@@ -56,14 +57,6 @@ In complex B2B applications, admin panels, and real-time monitoring systems, "wh
 | **Micro** | `8px` | Regular (400) | `1.1` |
 | **Mono** | `10px` | Monospace | `1.2` |
 
-### Spacing System
-| Token | Value | Usage |
-| :--- | :--- | :--- |
-| **Micro** | `1px` | Hairline separators. |
-| **Tight** | `2px` | Internal component padding. |
-| **Ultra** | `4px` | Gaps between related elements. |
-| **Normal** | `8px` | Section padding. |
-
 ---
 
 ## 📦 Installation
@@ -87,6 +80,7 @@ To unlock the full power of the HD-EUI design system, update your `tailwind.conf
 ```javascript
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class',
   content: [
     "./src/**/*.{js,ts,jsx,tsx}",
     "./node_modules/@amafjarkasi/hd-eui-core/dist/**/*.{js,ts,jsx,tsx}",
@@ -102,6 +96,11 @@ module.exports = {
           muted: "#87929d",
           "bg-light": "#ffffff",
           "bg-dark": "#f8f9fa",
+          // Dark Mode Tokens
+          "dark-bg": "#1f252a",
+          "dark-bg-alt": "#2f3941",
+          "dark-border": "#3e4b55",
+          "dark-text": "#d1d5db",
         },
       },
       fontSize: {
@@ -170,10 +169,10 @@ const data = [
 
 | Category | Components | Description |
 | :--- | :--- | :--- |
-| **Layout** | `Card`, `CardGrid`, `Modal`, `Sidebar`, `Accordion`, `Tabs` | Structural components for organizing complex views. |
-| **Form** | `Button`, `Input`, `Form`, `Select`, `Checkbox`, `Radio`, `Slider`, `Dropdown` | High-density input controls with validation support. |
-| **Data Display** | `Table`, `Tree`, `Badge`, `Avatar`, `List`, `CodeEditor`, `Calendar` | Optimized for high-throughput information visualization. |
-| **Feedback** | `Alert`, `AlertDialog`, `Toast`, `Notification`, `Spinner`, `ProgressBar`, `Skeleton`, `Tooltip`, `Popover` | Contextual messaging and loading states. |
+| **Layout** | `Card`, `CardGrid`, `Modal`, `Sidebar`, `Accordion`, `Tabs`, `DraggablePanel` | Structural components for organizing complex, multi-pane views. |
+| **Form** | `Button`, `Input`, `Form`, `Select`, `Checkbox`, `Radio`, `Slider`, `Dropdown`, `MultiSelect`, `DateRangePicker` | High-density input controls with validation and keyboard navigation. |
+| **Data Display** | `Table`, `DataGrid`, `Tree`, `Badge`, `Avatar`, `List`, `CodeEditor`, `Calendar`, `Timeline` | Optimized for high-throughput information visualization and audit logs. |
+| **Feedback** | `Alert`, `AlertDialog`, `Toast`, `Notification`, `Spinner`, `ProgressBar`, `Skeleton`, `Tooltip`, `Popover` | Contextual messaging, loading states, and non-blocking information. |
 | **Navigation** | `Breadcrumb`, `Pagination`, `Stepper`, `Navbar` | Compact wayfinding for deep application hierarchies. |
 
 ---
