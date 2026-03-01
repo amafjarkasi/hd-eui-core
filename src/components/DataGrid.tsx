@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import clsx from "clsx";
 import {
   ChevronUp,
@@ -51,17 +51,19 @@ export const DataGrid = <T extends Record<string, any>>({
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
   const [filters, setFilters] = useState<Record<string, string>>({});
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedIds, setSelectedIds] = useState<Set<string | number>>(new Set());
+  const [selectedIds, setSelectedIds] = useState<Set<string | number>>(
+    new Set(),
+  );
   const [searchQuery, setSearchQuery] = useState("");
 
   // Logic: Filtering
   const filteredData = useMemo(() => {
     return data.filter((row) => {
       const matchesSearch = Object.values(row).some((val) =>
-        String(val).toLowerCase().includes(searchQuery.toLowerCase())
+        String(val).toLowerCase().includes(searchQuery.toLowerCase()),
       );
       const matchesFilters = Object.entries(filters).every(([key, val]) =>
-        String(row[key]).toLowerCase().includes(val.toLowerCase())
+        String(row[key]).toLowerCase().includes(val.toLowerCase()),
       );
       return matchesSearch && matchesFilters;
     });
@@ -87,72 +89,81 @@ export const DataGrid = <T extends Record<string, any>>({
   }, [sortedData, currentPage, pageSize]);
 
   // Handlers
-  const handleSort = (key: string) => {
-    if (sortKey === key) {
-      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
-    } else {
-      setSortKey(key);
-      setSortOrder("asc");
-    }
-  };
+  const handleSort = useCallback(
+    (key: string) => {
+      if (sortKey === key) {
+        setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+      } else {
+        setSortKey(key);
+        setSortOrder("asc");
+      }
+    },
+    [sortKey, sortOrder],
+  );
 
-  const toggleSelectAll = () => {
+  const toggleSelectAll = useCallback(() => {
     if (selectedIds.size === paginatedData.length) {
       setSelectedIds(new Set());
       onSelectionChange?.([]);
     } else {
-      const newSelection = new Set(paginatedData.map((r) => r.id || r.key || JSON.stringify(r)));
+      const newSelection = new Set(
+        paginatedData.map((r) => r.id || r.key || JSON.stringify(r)),
+      );
       setSelectedIds(newSelection);
       onSelectionChange?.(paginatedData);
     }
-  };
+  }, [selectedIds.size, paginatedData, onSelectionChange]);
 
-  const toggleSelectRow = (row: T) => {
-    const id = row.id || row.key || JSON.stringify(row);
-    const newSelection = new Set(selectedIds);
-    if (newSelection.has(id)) {
-      newSelection.delete(id);
-    } else {
-      newSelection.add(id);
-    }
-    setSelectedIds(newSelection);
-    const selectedRows = data.filter((r) =>
-      newSelection.has(r.id || r.key || JSON.stringify(r))
-    );
-    onSelectionChange?.(selectedRows);
-  };
+  const toggleSelectRow = useCallback(
+    (row: T) => {
+      const id = row.id || row.key || JSON.stringify(row);
+      const newSelection = new Set(selectedIds);
+      if (newSelection.has(id)) {
+        newSelection.delete(id);
+      } else {
+        newSelection.add(id);
+      }
+      setSelectedIds(newSelection);
+      const selectedRows = data.filter((r) =>
+        newSelection.has(r.id || r.key || JSON.stringify(r)),
+      );
+      onSelectionChange?.(selectedRows);
+    },
+    [selectedIds, data, onSelectionChange],
+  );
 
   // Styles
   const isCompact = density === "compact";
-  const baseClasses = "flex flex-col w-full border border-hd-border rounded-md bg-hd-bg-light dark:bg-slate-900 dark:border-slate-700 overflow-hidden";
+  const baseClasses =
+    "flex flex-col w-full border border-hd-border dark:border-hd-dark-border rounded-md bg-hd-bg-light dark:bg-hd-dark-bg overflow-hidden transition-colors";
   const headerCellClasses = clsx(
-    "bg-hd-bg-dark dark:bg-slate-800 border-b border-r border-hd-border dark:border-slate-700 font-bold text-hd-primary dark:text-slate-200 uppercase tracking-wider select-none",
-    isCompact ? "px-1 py-1 text-[9px]" : "px-2 py-1.5 text-[10px]"
+    "bg-hd-bg-dark dark:bg-hd-dark-bg-alt border-b border-r border-hd-border dark:border-hd-dark-border font-bold text-hd-primary dark:text-hd-dark-text uppercase tracking-wider select-none transition-colors",
+    isCompact ? "px-1 py-1 text-[9px]" : "px-2 py-1.5 text-[10px]",
   );
   const bodyCellClasses = clsx(
-    "border-b border-r border-hd-border dark:border-slate-700 text-hd-primary dark:text-slate-300 truncate",
-    isCompact ? "px-1 py-0.5 text-[10px]" : "px-2 py-1 text-[11px]"
+    "border-b border-r border-hd-border dark:border-hd-dark-border text-hd-primary dark:text-hd-dark-text truncate align-middle",
+    isCompact ? "px-1 py-0.5 text-[10px]" : "px-2 py-1 text-[11px]",
   );
 
   return (
     <div className={clsx(baseClasses, className)}>
       {/* Toolbar */}
-      <div className="flex items-center justify-between p-1 border-b border-hd-border dark:border-slate-700 bg-hd-bg-light dark:bg-slate-900">
+      <div className="flex items-center justify-between p-1 border-b border-hd-border dark:border-hd-dark-border bg-hd-bg-light dark:bg-hd-dark-bg">
         <div className="relative flex items-center">
-          <Search className="absolute left-1.5 w-3 h-3 text-hd-muted" />
+          <Search className="absolute left-1.5 w-3 h-3 text-hd-muted dark:text-hd-dark-text-muted" />
           <input
             type="text"
             placeholder="Search all columns..."
-            className="pl-5 pr-2 py-0.5 w-48 text-[10px] border border-hd-border dark:border-slate-700 rounded bg-hd-bg-dark dark:bg-slate-800 focus:ring-1 focus:ring-hd-focus outline-none dark:text-white"
+            className="pl-5 pr-2 py-0.5 w-48 text-[10px] border border-hd-border dark:border-hd-dark-border rounded bg-hd-bg-dark dark:bg-hd-dark-bg-alt focus:ring-1 focus:ring-hd-focus outline-none dark:text-white transition-all"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
         <div className="flex items-center gap-1">
-          <button className="p-1 hover:bg-hd-bg-dark dark:hover:bg-slate-800 rounded text-hd-muted">
+          <button className="p-1 hover:bg-hd-bg-dark dark:hover:bg-hd-dark-bg-alt rounded text-hd-muted dark:text-hd-dark-text-muted transition-colors">
             <Filter size={12} />
           </button>
-          <button className="p-1 hover:bg-hd-bg-dark dark:hover:bg-slate-800 rounded text-hd-muted">
+          <button className="p-1 hover:bg-hd-bg-dark dark:hover:bg-hd-dark-bg-alt rounded text-hd-muted dark:text-hd-dark-text-muted transition-colors">
             <MoreHorizontal size={12} />
           </button>
         </div>
@@ -161,14 +172,17 @@ export const DataGrid = <T extends Record<string, any>>({
       {/* Table Body */}
       <div className="overflow-auto max-h-[500px]">
         <table className="w-full border-collapse table-fixed">
-          <thead className="sticky top-0 z-10">
+          <thead className="sticky top-0 z-10 shadow-sm">
             <tr>
               {selectable && (
                 <th className={clsx(headerCellClasses, "w-8 text-center")}>
                   <input
                     type="checkbox"
-                    className="w-3 h-3 rounded border-hd-border"
-                    checked={selectedIds.size > 0 && selectedIds.size === paginatedData.length}
+                    className="w-3 h-3 rounded border-hd-border dark:border-hd-dark-border accent-hd-focus"
+                    checked={
+                      selectedIds.size > 0 &&
+                      selectedIds.size === paginatedData.length
+                    }
                     onChange={toggleSelectAll}
                   />
                 </th>
@@ -178,21 +192,26 @@ export const DataGrid = <T extends Record<string, any>>({
                   key={col.key}
                   className={clsx(
                     headerCellClasses,
-                    col.sortable && "cursor-pointer hover:bg-hd-border dark:hover:bg-slate-700",
+                    col.sortable &&
+                      "cursor-pointer hover:bg-hd-border dark:hover:bg-hd-dark-border",
                     col.align === "center" && "text-center",
-                    col.align === "right" && "text-right"
+                    col.align === "right" && "text-right",
                   )}
                   style={{ width: col.width }}
                   onClick={() => col.sortable && handleSort(col.key)}
                 >
                   <div className="flex items-center gap-1">
-                    <span className="flex-1">{col.header}</span>
+                    <span className="flex-1 truncate">{col.header}</span>
                     {col.sortable && (
-                      <span className="text-hd-muted">
+                      <span className="text-hd-muted dark:text-hd-dark-text-muted flex-shrink-0">
                         {sortKey === col.key ? (
-                          sortOrder === "asc" ? <ChevronUp size={10} /> : <ChevronDown size={10} />
+                          sortOrder === "asc" ? (
+                            <ChevronUp size={10} strokeWidth={3} />
+                          ) : (
+                            <ChevronDown size={10} strokeWidth={3} />
+                          )
                         ) : (
-                          <ArrowUpDown size={8} />
+                          <ArrowUpDown size={8} className="opacity-30" />
                         )}
                       </span>
                     )}
@@ -201,22 +220,26 @@ export const DataGrid = <T extends Record<string, any>>({
               ))}
             </tr>
           </thead>
-          <tbody>
+          <tbody className="divide-y divide-hd-border dark:divide-hd-dark-border">
             {loading ? (
-              <tr>
-                <td colSpan={columns.length + (selectable ? 1 : 0)} className="p-4 text-center">
-                  <div className="animate-pulse flex flex-col gap-2">
-                    {Array(5).fill(0).map((_, i) => (
-                      <div key={i} className="h-4 bg-hd-bg-dark dark:bg-slate-800 rounded w-full" />
-                    ))}
-                  </div>
-                </td>
-              </tr>
+              Array.from({ length: 5 }).map((_, i) => (
+                <tr key={`skeleton-${i}`} className="animate-pulse">
+                  {selectable && <td className={bodyCellClasses} />}
+                  {columns.map((col) => (
+                    <td
+                      key={`skeleton-td-${col.key}`}
+                      className={bodyCellClasses}
+                    >
+                      <div className="h-2 bg-hd-bg-dark dark:bg-hd-dark-bg-alt rounded w-3/4" />
+                    </td>
+                  ))}
+                </tr>
+              ))
             ) : paginatedData.length === 0 ? (
               <tr>
                 <td
                   colSpan={columns.length + (selectable ? 1 : 0)}
-                  className="p-8 text-center text-[11px] text-hd-muted"
+                  className="px-4 py-8 text-center text-[10px] text-hd-muted dark:text-hd-dark-text-muted italic bg-hd-bg-light dark:bg-hd-dark-bg"
                 >
                   {emptyMessage}
                 </td>
@@ -229,15 +252,17 @@ export const DataGrid = <T extends Record<string, any>>({
                   <tr
                     key={rowId}
                     className={clsx(
-                      "hover:bg-hd-bg-dark dark:hover:bg-slate-800 transition-colors",
-                      isSelected && "bg-blue-50 dark:bg-blue-900/20"
+                      "group transition-colors hover:bg-hd-bg-dark dark:hover:bg-hd-dark-bg-alt",
+                      isSelected
+                        ? "bg-blue-50 dark:bg-hd-focus/10"
+                        : "bg-hd-bg-light dark:bg-hd-dark-bg",
                     )}
                   >
                     {selectable && (
                       <td className={clsx(bodyCellClasses, "text-center")}>
                         <input
                           type="checkbox"
-                          className="w-3 h-3 rounded border-hd-border"
+                          className="w-3 h-3 rounded border-hd-border dark:border-hd-dark-border accent-hd-focus"
                           checked={isSelected}
                           onChange={() => toggleSelectRow(row)}
                         />
@@ -249,10 +274,12 @@ export const DataGrid = <T extends Record<string, any>>({
                         className={clsx(
                           bodyCellClasses,
                           col.align === "center" && "text-center",
-                          col.align === "right" && "text-right"
+                          col.align === "right" && "text-right",
                         )}
                       >
-                        {col.render ? col.render(row[col.key], row, idx) : row[col.key]}
+                        {col.render
+                          ? col.render(row[col.key], row, idx)
+                          : String(row[col.key] ?? "")}
                       </td>
                     ))}
                   </tr>
@@ -264,40 +291,42 @@ export const DataGrid = <T extends Record<string, any>>({
       </div>
 
       {/* Pagination Footer */}
-      <div className="flex items-center justify-between p-1 bg-hd-bg-dark dark:bg-slate-800 border-t border-hd-border dark:border-slate-700">
-        <div className="text-[9px] text-hd-muted dark:text-slate-400">
-          Showing {Math.min(sortedData.length, (currentPage - 1) * pageSize + 1)} to{" "}
-          {Math.min(sortedData.length, currentPage * pageSize)} of {sortedData.length} entries
+      <div className="flex items-center justify-between p-1 bg-hd-bg-dark dark:bg-hd-dark-bg-alt border-t border-hd-border dark:border-hd-dark-border transition-colors">
+        <div className="text-[9px] text-hd-muted dark:text-hd-dark-text-muted">
+          Showing{" "}
+          {Math.min(sortedData.length, (currentPage - 1) * pageSize + 1)} to{" "}
+          {Math.min(sortedData.length, currentPage * pageSize)} of{" "}
+          {sortedData.length} entries
         </div>
         <div className="flex items-center gap-0.5">
           <button
             disabled={currentPage === 1}
             onClick={() => setCurrentPage(1)}
-            className="p-1 rounded hover:bg-hd-border dark:hover:bg-slate-700 disabled:opacity-30"
+            className="p-1 rounded hover:bg-hd-border dark:hover:bg-hd-dark-border disabled:opacity-30 transition-colors dark:text-hd-dark-text"
           >
             <ChevronsLeft size={12} />
           </button>
           <button
             disabled={currentPage === 1}
             onClick={() => setCurrentPage(currentPage - 1)}
-            className="p-1 rounded hover:bg-hd-border dark:hover:bg-slate-700 disabled:opacity-30"
+            className="p-1 rounded hover:bg-hd-border dark:hover:bg-hd-dark-border disabled:opacity-30 transition-colors dark:text-hd-dark-text"
           >
             <ChevronLeft size={12} />
           </button>
-          <span className="px-2 text-[10px] font-bold dark:text-white">
+          <span className="px-2 text-[10px] font-bold dark:text-hd-dark-text">
             {currentPage} / {totalPages || 1}
           </span>
           <button
             disabled={currentPage === totalPages || totalPages === 0}
             onClick={() => setCurrentPage(currentPage + 1)}
-            className="p-1 rounded hover:bg-hd-border dark:hover:bg-slate-700 disabled:opacity-30"
+            className="p-1 rounded hover:bg-hd-border dark:hover:bg-hd-dark-border disabled:opacity-30 transition-colors dark:text-hd-dark-text"
           >
             <ChevronRight size={12} />
           </button>
           <button
             disabled={currentPage === totalPages || totalPages === 0}
             onClick={() => setCurrentPage(totalPages)}
-            className="p-1 rounded hover:bg-hd-border dark:hover:bg-slate-700 disabled:opacity-30"
+            className="p-1 rounded hover:bg-hd-border dark:hover:bg-hd-dark-border disabled:opacity-30 transition-colors dark:text-hd-dark-text"
           >
             <ChevronsRight size={12} />
           </button>

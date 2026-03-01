@@ -1,0 +1,16 @@
+import{j as r}from"./jsx-runtime-u17CrQMm.js";import{c as i}from"./clsx-B-dksMZM.js";import{r as b}from"./index-yRop1keA.js";const n=({currentPage:e,totalPages:a,onPageChange:u,maxVisible:p=5,className:P})=>{if(a<=1)return null;const x=(()=>{if(a<=p)return Array.from({length:a},(o,V)=>V+1);const t=[],s=Math.max(1,e-Math.floor(p/2)),m=Math.min(a,s+p-1);s>1&&(t.push(1),s>2&&t.push("..."));for(let o=s;o<=m;o++)t.push(o);return m<a&&(m<a-1&&t.push("..."),t.push(a)),t})(),f="inline-flex items-center gap-0.5 p-0.5 bg-hd-bg-light dark:bg-slate-900 border border-hd-border dark:border-slate-700 rounded-md text-[8px]",g="px-0.5 py-0.5 border border-transparent hover:bg-hd-bg-dark dark:hover:bg-slate-800 hover:text-hd-primary dark:text-slate-300 transition-colors cursor-pointer",y="px-1 py-0.5 text-hd-muted",C="bg-hd-primary text-white font-bold",h="opacity-50 cursor-not-allowed";return r.jsxs("nav",{className:i(f,P),"aria-label":"Pagination",children:[r.jsx("button",{onClick:()=>u(e-1),disabled:e===1,className:i(g,{[h]:e===1}),children:"‹"}),x.map((t,s)=>typeof t=="number"?r.jsx("button",{onClick:()=>u(t),className:i(g,{[C]:t===e}),children:t},s):r.jsx("span",{className:y,children:t},s)),r.jsx("button",{onClick:()=>u(e+1),disabled:e===a,className:i(g,{[h]:e===a}),children:"›"})]})};try{n.displayName="Pagination",n.__docgenInfo={description:"",displayName:"Pagination",props:{currentPage:{defaultValue:null,description:"",name:"currentPage",required:!0,type:{name:"number"}},totalPages:{defaultValue:null,description:"",name:"totalPages",required:!0,type:{name:"number"}},onPageChange:{defaultValue:null,description:"",name:"onPageChange",required:!0,type:{name:"(page: number) => void"}},maxVisible:{defaultValue:{value:"5"},description:"",name:"maxVisible",required:!1,type:{name:"number"}},className:{defaultValue:null,description:"",name:"className",required:!1,type:{name:"string"}}}}}catch{}const S={title:"Navigation/Pagination",component:n,tags:["autodocs"]},l={render:()=>{const[e,a]=b.useState(1);return r.jsx(n,{currentPage:e,totalPages:10,onPageChange:a})}},c={render:()=>{const[e,a]=b.useState(25);return r.jsx(n,{currentPage:e,totalPages:100,onPageChange:a,maxVisible:7})}},d={render:()=>{const[e,a]=b.useState(1);return r.jsx(n,{currentPage:e,totalPages:5,onPageChange:a,maxVisible:3})}};l.parameters={...l.parameters,docs:{...l.parameters?.docs,source:{originalSource:`{
+  render: () => {
+    const [page, setPage] = useState(1);
+    return <Pagination currentPage={page} totalPages={10} onPageChange={setPage} />;
+  }
+}`,...l.parameters?.docs?.source}}};c.parameters={...c.parameters,docs:{...c.parameters?.docs,source:{originalSource:`{
+  render: () => {
+    const [page, setPage] = useState(25);
+    return <Pagination currentPage={page} totalPages={100} onPageChange={setPage} maxVisible={7} />;
+  }
+}`,...c.parameters?.docs?.source}}};d.parameters={...d.parameters,docs:{...d.parameters?.docs,source:{originalSource:`{
+  render: () => {
+    const [page, setPage] = useState(1);
+    return <Pagination currentPage={page} totalPages={5} onPageChange={setPage} maxVisible={3} />;
+  }
+}`,...d.parameters?.docs?.source}}};const k=["Default","ManyPages","Compact"];export{d as Compact,l as Default,c as ManyPages,k as __namedExportsOrder,S as default};

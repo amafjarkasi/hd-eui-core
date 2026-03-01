@@ -1,6 +1,5 @@
 import type { Preview } from "@storybook/react";
 import React, { useEffect } from "react";
-import "../src/index";
 import "../src/index.css";
 
 const preview: Preview = {
@@ -14,6 +13,21 @@ const preview: Preview = {
         items: [
           { value: "light", icon: "circlehollow", title: "Light" },
           { value: "dark", icon: "circle", title: "Dark" },
+        ],
+        showName: true,
+      },
+    },
+    zoom: {
+      name: "Zoom",
+      description: "Zoom level for high-density components",
+      defaultValue: "125%",
+      toolbar: {
+        icon: "zoom",
+        items: [
+          { value: "100%", title: "100% (Actual Size)" },
+          { value: "125%", title: "125% (Recommended)" },
+          { value: "150%", title: "150% (Large)" },
+          { value: "200%", title: "200% (Extra Large)" },
         ],
         showName: true,
       },
@@ -40,6 +54,7 @@ const preview: Preview = {
           "Feedback",
           "Data Display",
           "Navigation",
+          "Heavyweight",
         ],
       },
     },
@@ -47,6 +62,7 @@ const preview: Preview = {
   decorators: [
     (Story, context) => {
       const theme = context.globals.theme || "light";
+      const zoom = context.globals.zoom || "125%";
 
       useEffect(() => {
         const html = document.documentElement;
@@ -59,13 +75,25 @@ const preview: Preview = {
 
       return (
         <div
-          className={`p-4 min-h-screen ${
+          className={`min-h-screen transition-colors duration-200 ${
             theme === "dark"
               ? "bg-[#1f252a] text-white"
               : "bg-hd-bg-light text-hd-primary"
           }`}
+          style={{
+            padding: "2rem",
+            fontSize: "14px", // Increase base font for Storybook docs/wrapper
+          }}
         >
-          <Story />
+          <div
+            style={{
+              transform: `scale(${parseFloat(zoom) / 100})`,
+              transformOrigin: "top left",
+              width: `${100 / (parseFloat(zoom) / 100)}%`,
+            }}
+          >
+            <Story />
+          </div>
         </div>
       );
     },
