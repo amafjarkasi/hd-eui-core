@@ -25,7 +25,7 @@ export interface DropdownProps<V = any> {
   disabled?: boolean;
 }
 
-export const Dropdown = <V,>({
+export const Dropdown = <V = any,>({
   trigger,
   options,
   onSelect,
