@@ -8,16 +8,16 @@ export type DropdownPlacement =
   | "top-left"
   | "top-right";
 
-export interface DropdownOption {
+export interface DropdownOption<V = any> {
   label: string;
-  value: any;
+  value: V;
   disabled?: boolean;
 }
 
-export interface DropdownProps {
+export interface DropdownProps<V = any> {
   trigger: React.ReactNode;
-  options: DropdownOption[];
-  onSelect?: (value: any) => void;
+  options: DropdownOption<V>[];
+  onSelect?: (value: V) => void;
   isOpen?: boolean;
   onOpenChange?: (open: boolean) => void;
   placement?: DropdownPlacement;
@@ -25,7 +25,7 @@ export interface DropdownProps {
   disabled?: boolean;
 }
 
-export const Dropdown: React.FC<DropdownProps> = ({
+export const Dropdown = <V,>({
   trigger,
   options,
   onSelect,
@@ -34,7 +34,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
   placement = "bottom-left",
   className,
   disabled = false,
-}) => {
+}: DropdownProps<V>) => {
   const [uncontrolledOpen, setUncontrolledOpen] = useState(false);
   const isControlled = controlledOpen !== undefined;
   const open = isControlled ? controlledOpen : uncontrolledOpen;
@@ -83,7 +83,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
 
   const handleOptionKeyDown = (
     event: React.KeyboardEvent,
-    option: DropdownOption,
+    option: DropdownOption<V>,
   ) => {
     switch (event.key) {
       case "Enter":
@@ -95,7 +95,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
     }
   };
 
-  const handleSelect = (option: DropdownOption) => {
+  const handleSelect = (option: DropdownOption<V>) => {
     if (option.disabled) return;
     onSelect?.(option.value);
     setOpen(false);

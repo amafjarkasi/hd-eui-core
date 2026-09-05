@@ -2,20 +2,13 @@ import React from "react";
 import clsx from "clsx";
 import { ArrowUpDown, ChevronUp, ChevronDown } from "lucide-react";
 
-/**
- * Column definition for the Data Table.
- */
-export interface Column<T = any> {
-  /** Unique key for the column, matching a key in the data object */
-  key: string;
+interface BaseColumn<T> {
   /** Header label to display */
   header: string;
   /** Optional fixed width (e.g., '100px', '10%') */
   width?: string;
   /** Text alignment */
   align?: "left" | "center" | "right";
-  /** Custom renderer function for the cell content */
-  render?: (value: any, row: T, index: number) => React.ReactNode;
   /** Whether the column is sortable */
   sortable?: boolean;
   /** Optional class name for the column cells */
@@ -23,9 +16,28 @@ export interface Column<T = any> {
 }
 
 /**
+ * Column definition for the Data Table.
+ */
+export type Column<T = Record<string, any>> =
+  | {
+      [K in keyof T]: BaseColumn<T> & {
+        /** Unique key for the column, matching a key in the data object */
+        key: K;
+        /** Custom renderer function for the cell content */
+        render?: (value: T[K], row: T, index: number) => React.ReactNode;
+      };
+    }[keyof T]
+  | (BaseColumn<T> & {
+      /** Unique key for the column, matching a key in the data object */
+      key: string;
+      /** Custom renderer function for the cell content */
+      render?: (value: unknown, row: T, index: number) => React.ReactNode;
+    });
+
+/**
  * Props for the Table component.
  */
-export interface TableProps<T = any> {
+export interface TableProps<T = Record<string, any>> {
   /** Array of data objects to display */
   data: T[];
   /** Array of column definitions */

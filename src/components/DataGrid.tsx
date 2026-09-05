@@ -13,17 +13,27 @@ import {
   MoreHorizontal,
 } from "lucide-react";
 
-export interface DataGridColumn<T = any> {
-  key: string;
+interface BaseDataGridColumn<T> {
   header: string;
   width?: string;
   sortable?: boolean;
   filterable?: boolean;
-  render?: (value: any, row: T, index: number) => React.ReactNode;
   align?: "left" | "center" | "right";
 }
 
-export interface DataGridProps<T = any> {
+export type DataGridColumn<T = Record<string, any>> =
+  | {
+      [K in keyof T]: BaseDataGridColumn<T> & {
+        key: K;
+        render?: (value: T[K], row: T, index: number) => React.ReactNode;
+      };
+    }[keyof T]
+  | (BaseDataGridColumn<T> & {
+      key: string;
+      render?: (value: unknown, row: T, index: number) => React.ReactNode;
+    });
+
+export interface DataGridProps<T = Record<string, any>> {
   data: T[];
   columns: DataGridColumn<T>[];
   pageSize?: number;
