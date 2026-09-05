@@ -1,5 +1,6 @@
 import React from "react";
 import clsx from "clsx";
+import { sanitizeUrl } from "../utils/security";
 
 export interface BreadcrumbItem {
   label: string;
@@ -38,7 +39,7 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
           )}
           {item.href ? (
             <a
-              href={item.href}
+              href={sanitizeUrl(item.href)}
               className="text-hd-primary dark:text-hd-dark-text hover:text-hd-focus dark:hover:text-hd-focus transition-colors cursor-pointer px-1 py-0.5 rounded"
             >
               {item.label}
