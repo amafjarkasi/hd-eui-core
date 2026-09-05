@@ -27,7 +27,7 @@ export const Default: Story = {
       </Button>
     ),
     options,
-    onSelect: (val) => console.log('Selected:', val),
+    onSelect: () => {},
   },
 };
 
