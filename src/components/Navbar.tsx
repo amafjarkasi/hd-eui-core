@@ -1,5 +1,6 @@
 import React from "react";
 import clsx from "clsx";
+import { sanitizeUrl } from "../utils/security";
 
 export interface NavbarLink {
   label: string;
@@ -31,7 +32,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {links.map((link, index) => (
             <a
               key={index}
-              href={link.href}
+              href={sanitizeUrl(link.href)}
               className={clsx(
                 "flex items-center h-8 px-2 text-[10px] font-medium transition-colors border-b-2",
                 link.active
