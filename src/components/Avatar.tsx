@@ -30,13 +30,20 @@ export const Avatar: React.FC<AvatarProps> = ({
     className,
   );
 
-  const initials = name
-    .trim()
-    .split(/\s+/)
-    .filter((part) => part.length > 0)
-    .map((part) => part.charAt(0).toUpperCase())
-    .slice(0, 2)
-    .join("");
+  let initials = "";
+  let count = 0;
+  let isNewWord = true;
+  for (let i = 0; i < name.length; i++) {
+    const char = name[i];
+    if (/\s/.test(char)) {
+      isNewWord = true;
+    } else if (isNewWord) {
+      initials += char.toUpperCase();
+      count++;
+      if (count === 2) break;
+      isNewWord = false;
+    }
+  }
 
   return (
     <div className="relative">
