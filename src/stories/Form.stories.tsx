@@ -36,7 +36,7 @@ export const Complex: Story = {
   render: () => (
     <Form
       className="w-96"
-      onSubmit={(data) => console.log('Form Submitted:', data)}
+      onSubmit={() => {}}
     >
       <div className="grid grid-cols-2 gap-2">
         <Input name="firstName" label="First Name" />
