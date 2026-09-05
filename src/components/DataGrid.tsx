@@ -58,13 +58,25 @@ export const DataGrid = <T extends Record<string, any>>({
 
   // Logic: Filtering
   const filteredData = useMemo(() => {
+    const lowerSearchQuery = searchQuery.toLowerCase();
+    const filterEntries = Object.entries(filters).map(([key, val]) => [
+      key,
+      val.toLowerCase(),
+    ]);
+
     return data.filter((row) => {
-      const matchesSearch = Object.values(row).some((val) =>
-        String(val).toLowerCase().includes(searchQuery.toLowerCase()),
+      const matchesSearch = lowerSearchQuery
+        ? Object.values(row).some((val) =>
+            String(val).toLowerCase().includes(lowerSearchQuery),
+          )
+        : true;
+
+      const matchesFilters = filterEntries.every(([key, lowerVal]) =>
+        String(row[key] ?? "")
+          .toLowerCase()
+          .includes(lowerVal),
       );
-      const matchesFilters = Object.entries(filters).every(([key, val]) =>
-        String(row[key]).toLowerCase().includes(val.toLowerCase()),
-      );
+
       return matchesSearch && matchesFilters;
     });
   }, [data, searchQuery, filters]);
